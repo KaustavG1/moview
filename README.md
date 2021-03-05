@@ -1,4 +1,3 @@
 MOVIEW
 
-A movie description app.
-
+A movie finder app.
