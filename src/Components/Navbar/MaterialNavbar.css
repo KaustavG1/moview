@@ -1,0 +1,23 @@
+.nav-bar {
+  background-color: #000000;
+  display: flex;
+  align-items: center;
+
+  min-height: 6vh;
+  color: #f3ebf6;
+  text-transform: uppercase;
+  box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.4);
+}
+
+.logo {
+  padding: 5px 40px;
+  cursor: alias;
+}
+
+.search-field {
+  flex-grow: 4;
+}
+
+.theme-switch {
+  margin: 5px 20px 5px 40px;
+}

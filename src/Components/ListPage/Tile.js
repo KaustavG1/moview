@@ -4,13 +4,12 @@ import { withRouter } from 'react-router-dom';
 
 function Tile(props) {
     const { imgSrc, name, id } = props;
-    // console.log(props);
 
     function handleClick() {
         props.history.push(`/${id}`);
     }
 
-    return (<div onClick={handleClick}>
+    return (<div onClick={handleClick} className="tile">
         <img src={imgSrc} alt={name} />
         <p>{name}</p>
     </div>);

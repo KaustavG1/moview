@@ -1,28 +1,43 @@
 import React, { useEffect, useState } from 'react';
 import './DetailTile.css';
 import axios from 'axios';
+import Button from '@material-ui/core/Button';
 
 function DetailTile(props) {
     const [movieData, setMovieData] = useState({});
+    const [dataReady, setDataReady] = useState(false);
 
     async function hitAPIForID() {
+        console.log(props.match.params.movieID);
         const response = await axios.get(`${props.apiURL}?i=${props.match.params.movieID}&apikey=${props.apiKey}`);
         setMovieData(response.data);
+        setDataReady(true);
     }
     
-    useEffect(() => hitAPIForID(), [movieData]);
+    useEffect(() => hitAPIForID(), []);
+
+    function renderDetails() {
+        if(!dataReady) {
+            return (<h1 className="loading">Loading...</h1>);
+        } else {
+            return (<div className="details-card">
+            <img src={movieData.Poster} alt={movieData.Title} className="detail-img" />
+            <div className="detail-desc">
+                <div className="title">{`${movieData.Title} (${movieData.Year})`}</div>
+                <div className="desc">{`IMDB Rating: ${movieData.imdbRating}`}</div>
+                <div className="desc">{`Runtime: ${movieData.Runtime}`}</div>
+                <div className="desc">{`Genre: ${movieData.Genre}`}</div>
+                <div className="desc">{`Director: ${movieData.Director}`}</div>
+                <div className="desc">{`Country: ${movieData.Country}`}</div>
+                <p>{movieData.Plot}</p>
+            </div>
+        </div>);
+        }
+    }
 
     return (<div>
-        <h1>Detail Page</h1>
-        <img src={movieData.Poster} alt={movieData.Title} />
-        <h1>{`${movieData.Title} (${movieData.Year})`}</h1>
-        <h2>{`IMDB Rating: ${movieData.imdbRating}`}</h2>
-        <h2>{`Runtime: ${movieData.Runtime}`}</h2>
-        <h2>{`Genre: ${movieData.Genre}`}</h2>
-        <h2>{`Director: ${movieData.Director}`}</h2>
-        <h2>{`Country: ${movieData.Country}`}</h2>
-        <p>{movieData.Plot}</p>
-        {/* <button>View Similar</button> */}
+        {renderDetails()}
+        <Button variant="contained" size="large" color="#ffffff">View Similar</Button>
     </div>);
 }
 

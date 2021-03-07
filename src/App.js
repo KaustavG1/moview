@@ -1,4 +1,6 @@
+import React from 'react';
 import './App.css';
+// import Navbar from './Components/Navbar/Navbar';
 import Navbar from './Components/Navbar/Navbar';
 import ListHolder from './Components/ListPage/ListHolder';
 import DetailTile from './Components/DetailPage/DetailTile';
